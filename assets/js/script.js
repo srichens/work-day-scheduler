@@ -11,19 +11,21 @@ $(function () {
 
 
   
-  let scheduleEl = $('#schedule');
+  /*let scheduleEl = $('#schedule');
     console.log(scheduleEl.children());
     console.log(scheduleEl.children().eq(2));
   let hoursEl = scheduleEl.children();
-    console.log(hoursEl);
-  let saveButtonEl = $('#save');
-  let textEl = $('#text'); 
-  let allHours = $('#hour');
-    console.log(allHours);
-  if (savedText){textEl.val(savedText)};
+    console.log(hoursEl);*/
+    //use saveBtn class instead of save id
+    //id will only target one element; class can target all
+  let saveButtonEl = $('.saveBtn');
+  let textEl = $('.description'); 
+  let hourEl = $('.hour');
+    //console.log(allHours);
+  //if (savedText){textEl.val(savedText)};
   //if (savedText){ renderSavedText ();} else {let savedText = ''};
 
-  renderSavedText ();
+  //renderSavedText ();
  
   saveButtonEl.on('click', function () {
     console.log('this event listener is working'); 
