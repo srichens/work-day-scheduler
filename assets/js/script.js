@@ -9,16 +9,61 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
+
+  
+  let scheduleEl = $('#schedule');
+    console.log(scheduleEl.children());
+    console.log(scheduleEl.children().eq(2));
+  let hoursEl = scheduleEl.children();
+    console.log(hoursEl);
   let saveButtonEl = $('#save');
   let textEl = $('#text'); 
-  //let userEvent = textEl.value;
+  let allHours = $('#hour');
+    console.log(allHours);
+  if (savedText){textEl.val(savedText)};
+  //if (savedText){ renderSavedText ();} else {let savedText = ''};
 
+  renderSavedText ();
+ 
   saveButtonEl.on('click', function () {
-    console.log('hi'); 
-    //textEl.text('hi');
-    let userEvent = textEl.val(); console.log(userEvent);
+    console.log('this event listener is working'); 
+       
+    console.log(textEl.val());
+
+    let textInput = textEl.val()
+    localStorage.setItem("event", textInput);
+    renderSavedText ();
+   // let savedText = textEl.val(innerHtml);   
+    //let userEvent = textEl.val();    
+    //console.log(userEvent);
+   // console.log(typeof userEvent);
+    //let stringEvent = JSON.stringify(userEvent);
+    //console.log(typeof userEvent);
     
-  })
+    
+    
+   // newEvent = localStorage.getItem("event");
+   //textEl.textContent = newEvent;
+   // console.log(textEl.textContent);
+    //saveEvent();  
+    }    
+  )
+
+  function renderSavedText () {
+    savedText = localStorage.getItem("event");
+    console.log(savedText);
+    console.log(typeof savedText);
+    saveText()
+  }
+  
+  function saveText() {
+    savedText = textEl.val();
+  }
+
+  /*function saveEvent() {
+    newEvent = JSON.parse(localStorage.getItem("event"));
+    textEl.val(newEvent);
+  }*/
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
