@@ -10,62 +10,128 @@ $(function () {
   // useful when saving the description in local storage?
 
 
-  
-  /*let scheduleEl = $('#schedule');
-    console.log(scheduleEl.children());
-    console.log(scheduleEl.children().eq(2));
-  let hoursEl = scheduleEl.children();
-    console.log(hoursEl);*/
-    //use saveBtn class instead of save id
-    //id will only target one element; class can target all
+    //I initially threw in an id on buttons to target elements and test the click event
+    //But I put the same id for each; as I was doing it, I knew something wasn't right
+    //ids are unique - an id will only target one thing
+    //switched to saveBtn class on click event instead of using same id for each
+    //Then the click event can happen on every button with only one listener
   let saveButtonEl = $('.saveBtn');
-  let textEl = $('.description'); 
-  let hourEl = $('.hour');
-    //console.log(allHours);
-  //if (savedText){textEl.val(savedText)};
-  //if (savedText){ renderSavedText ();} else {let savedText = ''};
+  let time = dayjs().format('HH');
+  console.log(typeof time);
+  console.log(time);
+  let timeIdFormat = "hour-" + time;
+  console.log(timeIdFormat);
+  
+  let scheduleEl = $('#schedule');
+  let scheduleArr = scheduleEl.children();  
+  console.log(scheduleArr);
+  //console.log(scheduleEl.children().eq(0).attr('id'));
 
-  //renderSavedText ();
- 
-  saveButtonEl.on('click', function () {
-    console.log('this event listener is working'); 
-       
-    console.log(textEl.val());
+    for (let i = 0; i <scheduleArr.length; i++) {
+    //console.log(scheduleEl.children().eq(i).attr('id'));
+    let theTime = (scheduleEl.children().eq(i).attr('id')); 
+    if (theTime === timeIdFormat) {$('.time-block').addClass('present')};
+    if (theTime > timeIdFormat) {$('.time-block').addClass('past')};
+    if (theTime < timeIdFormat) {$('.time-block').addClass('future')};
 
-    let textInput = textEl.val()
-    localStorage.setItem("event", textInput);
-    renderSavedText ();
-   // let savedText = textEl.val(innerHtml);   
-    //let userEvent = textEl.val();    
-    //console.log(userEvent);
-   // console.log(typeof userEvent);
-    //let stringEvent = JSON.stringify(userEvent);
-    //console.log(typeof userEvent);
-    
-    
-    
-   // newEvent = localStorage.getItem("event");
-   //textEl.textContent = newEvent;
-   // console.log(textEl.textContent);
-    //saveEvent();  
-    }    
-  )
+    /*let theTime = (scheduleEl.children().eq(i).attr('id'));
+    console.log(theTime);
 
-  function renderSavedText () {
-    savedText = localStorage.getItem("event");
-    console.log(savedText);
-    console.log(typeof savedText);
-    saveText()
+    let strTime = Array.from(theTime);
+    console.log(strTime);
+    let thisHour = strTime[5] + strTime[6];
+    console.log(thisHour);
+    
+    if (thisHour === time) {$('.time-block').css('background-color', '#ff6961')}
+    else if (thisHour > time) {$('.time-block').css('background-color', '#77dd77')}
+    else {$('.time-block').css('background-color', '#d3d3d3')};*/
   }
   
-  function saveText() {
-    savedText = textEl.val();
-  }
 
-  /*function saveEvent() {
-    newEvent = JSON.parse(localStorage.getItem("event"));
-    textEl.val(newEvent);
-  }*/
+
+  
+
+ 
+  
+
+    //creates a click event on every button with the saveBtn class
+  saveButtonEl.on('click', saveTextLocal);
+
+    //now I need to make text content of each textEl work for each time block
+    //textEl targets the textarea (input type) in each hour blook
+  let textEl = $('.description'); 
+
+
+  function saveTextLocal() {
+    console.log('this event listener is working'); 
+    let textInput = $(this).siblings('.description').val();
+    let hourText = $(this).siblings('.hour').text();
+  
+    console.log($(this).parent().attr('id'));
+    let thisTime = $(this).parent().attr('id');
+    console.log(thisTime);
+    console.log(typeof thisTime);
+    let strTime = Array.from(thisTime);
+    console.log(strTime);
+    let thisHour = strTime[5] + strTime[6];
+    console.log(thisHour);
+
+    if (thisHour == time) {$(this).parent().css('background-color', '#ff6961')};
+    if (thisHour > time) {$(this).parent().css('background-color', '#77dd77')};
+    if (thisHour < time) {$(this).parent().css('background-color', '#d3d3d3')};
+   
+    /*let thisTimeBlock = {
+
+    }*/
+    //let textInput = $(this).siblings('.description').val();
+    //let hourText = $(this).siblings('.hour').text();
+    
+    //let sibs = $(this).siblings().val(textEl);
+   // console.log(sibs);
+   
+
+    //console.log(text2);
+    console.log(textInput);  
+    console.log(hourText);  
+    //console.log(textInput.val());
+
+    //let userInput = textInput.val();
+
+    let userEntry = {
+      userTime: hourText,
+      userNote: textInput
+      };
+
+    localStorage.setItem("savedEntry", JSON.stringify(userEntry));
+
+    //localStorage.setItem("event", textInput);
+    renderSavedInput ();  
+  }   
+    
+ 
+  
+
+    function renderSavedInput () {    
+    let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
+    console.log(savedInput);
+    console.log(typeof savedInput);
+    if (savedInput !== null) {
+      $(this).siblings('.description').html(savedInput);
+      } else { 
+          return;
+      }
+    //console.log(textEl.val());  
+    //let renderedText = textEl.val(savedInput);
+    //renderedText = textEl.innerHTML;
+    //let renderedText = $(this).textEl.val(savedInput);
+    //console.log(renderedText);
+    //console.log(textEl.val());   
+ 
+    
+  }
+  
+  
+
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
