@@ -23,16 +23,85 @@ $(function () {
   console.log(timeIdFormat);
   
   let scheduleEl = $('#schedule');
-  let scheduleArr = scheduleEl.children();  
-  console.log(scheduleArr);
+  let scheduleKids = scheduleEl.children();  
+  console.log(scheduleKids);
+  
+  //let scheduleArr = Array.from(scheduleKids);
+  //console.log(scheduleArr);
   //console.log(scheduleEl.children().eq(0).attr('id'));
 
-    for (let i = 0; i <scheduleArr.length; i++) {
+  //now that i have the time text equaling the id, try .each
+timeBlockColor();
+  
+function timeBlockColor () {
+  
+  //let theTime = (scheduleEl.children().eq(i).attr('id'));
+ //console.log(theTime);
+
+  //let strTime = Array.from(theTime);
+ // console.log(strTime);
+  //let thisHour = strTime[5] + strTime[6];
+  //console.log(thisHour);
+
+  $(".time-block").each(function() {
+   
+    let theTime = ($(this).attr('id'));
+    let strTime = Array.from(theTime);
+    console.log(strTime);
+    let thisHour = strTime[5] + strTime[6];
+    console.log(thisHour);
+    console.log(time);
+    if (thisHour == time){$(this).addClass('present');} 
+    else if (thisHour > time) {$(this).addClass('future');} 
+    else if (thisHour < time) {$(this).addClass('past');} 
+    else return;
+  })
+   
+    // for (let i = 0; i < scheduleKids.length; i++) {
+      //let kidId = scheduleEl.children().eq(i).attr('id');
+    //  if (kidId === timeIdFormat) {$('.time-block').addClass('present')}
+    // else if (kidId  > timeIdFormat) {$('.time-block').addClass('past')}
+      // else {$('.time-block').addClass('future')};
+      
+     // console.log(scheduleArr);
+      //console.log(scheduleArr[10]);
+
+     /*for (let i = 0; i < scheduleArr.length; i++) {
+       
+  
+      if (scheduleArr[i] === timeIdFormat) {$('.time-block').addClass('present')};
+      if (scheduleArr[i] > timeIdFormat) {$('.time-block').addClass('past')};
+       if (scheduleArr[i] < timeIdFormat) {$('.time-block').addClass('future')};
+    
+      //timeBlockColor ();
+
     //console.log(scheduleEl.children().eq(i).attr('id'));
     let theTime = (scheduleEl.children().eq(i).attr('id')); 
+
+    console.log(theTime);
     if (theTime === timeIdFormat) {$('.time-block').addClass('present')};
     if (theTime > timeIdFormat) {$('.time-block').addClass('past')};
-    if (theTime < timeIdFormat) {$('.time-block').addClass('future')};
+    if (theTime < timeIdFormat) {$('.time-block').addClass('future')};*/
+
+    
+  };
+
+   
+
+  /*function timeBlockColor () {
+    console.log(scheduleArr[10]);
+       for (let i = 0; i < scheduleArr.length; i++) {
+       
+  
+      if (scheduleArr[i] === timeIdFormat) {$('.time-block').addClass('present')};
+      if (scheduleArr[i] > timeIdFormat) {$('.time-block').addClass('past')};
+      if (scheduleArr[i] < timeIdFormat) {$('.time-block').addClass('future')};
+
+      if (theTime === timeIdFormat) {$('.time-block').addClass('present')};
+      if (theTime > timeIdFormat) {$('.time-block').addClass('past')};
+      if (theTime < timeIdFormat) {$('.time-block').addClass('future')};
+  
+      }*/
 
     /*let theTime = (scheduleEl.children().eq(i).attr('id'));
     console.log(theTime);
@@ -45,7 +114,7 @@ $(function () {
     if (thisHour === time) {$('.time-block').css('background-color', '#ff6961')}
     else if (thisHour > time) {$('.time-block').css('background-color', '#77dd77')}
     else {$('.time-block').css('background-color', '#d3d3d3')};*/
-  }
+  
   
 
 
