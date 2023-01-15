@@ -10,20 +10,15 @@ $(function () {
   // useful when saving the description in local storage?
 
 
-    //I initially threw in an id on buttons to target elements and test the click event
-    //But I put the same id for each; as I was doing it, I knew something wasn't right
-    //ids are unique - an id will only target one thing
-    //switched to saveBtn class on click event instead of using same id for each
-    //Then the click event can happen on every button with only one listener
-
   //sets today's date in header     
   let today = dayjs();
   $('#currentDay').text(today.format('MMM D, YYYY'));
 
   // sets up current time format to correspond with timeblock ID (military time for easy comparisons, too)
   let time = dayjs().format('HH');
-  console.log(typeof time);
-  console.log(time);  
+  let userArray = [];
+  //onsole.log(typeof time);
+  //console.log(time);  
   
   //function that changes time block color to match the time of day  
   timeColor();
@@ -35,10 +30,10 @@ $(function () {
     //set ID to a format that matches the format of the current time
     let theTime = ($(this).attr('id'));
     let strTime = Array.from(theTime);
-    console.log(strTime);
+    //console.log(strTime);
     let thisHour = strTime[5] + strTime[6];
-    console.log(thisHour);
-    console.log(time);
+    //console.log(thisHour);
+    //console.log(time);
 
     //changes the timeblock color to match the current time using the ID with modified format
     if (thisHour == time){$(this).addClass('present');} 
@@ -52,49 +47,52 @@ $(function () {
   let saveButtonEl = $('.saveBtn');
   saveButtonEl.on('click', saveTextLocal);
 
+  //trying to save text
+
   function saveTextLocal() {
-    console.log('this event listener is working'); 
+    //console.log('this event listener is working'); 
     let textInput = $(this).siblings('.description').val();
     let hourText = $(this).siblings('.hour').text(); 
     
-    
-    //let textInput = $(this).siblings('.description').val();
-    //let hourText = $(this).siblings('.hour').text();
-    
-    //let sibs = $(this).siblings().val(textEl);
-   // console.log(sibs);
+    //console.log(textInput);  
+   // console.log(hourText);  
    
-
-    //console.log(text2);
-    console.log(textInput);  
-    console.log(hourText);  
-    //console.log(textInput.val());
-
-    //let userInput = textInput.val();
-
+   
     let userEntry = {
       userTime: hourText,
       userNote: textInput
-      };
+    };
+    //console.log(userEntry);
+    userArray.push(userEntry);
 
-    localStorage.setItem("savedEntry", JSON.stringify(userEntry));
+    localStorage.setItem("savedEntry", JSON.stringify(userArray));
 
-    //localStorage.setItem("event", textInput);
-    renderSavedInput ();  
-  }   
+    //let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
+
+    //console.log(savedInput.userNote);
+
+
     
- 
+     
+    
+  };   
+    
+  renderSavedInput ();   
   
 
     function renderSavedInput () {    
     let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
     console.log(savedInput);
-    console.log(typeof savedInput);
-    if (savedInput !== null) {
-      $(this).siblings('.description').html(savedInput);
-      } else { 
-          return;
-      }
+
+    $.each(savedInput, function(index) {
+      userArray.push(savedInput[index]);
+    })
+
+    
+    //console.log(typeof savedInput);
+   
+    $('.description').text(savedInput.userNote);
+     
     //console.log(textEl.val());  
     //let renderedText = textEl.val(savedInput);
     //renderedText = textEl.innerHTML;
@@ -105,7 +103,7 @@ $(function () {
     
   }
   
-  
+  console.log(userArray);
 
 
   //
