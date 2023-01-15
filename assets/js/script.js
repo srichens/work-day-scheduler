@@ -15,143 +15,49 @@ $(function () {
     //ids are unique - an id will only target one thing
     //switched to saveBtn class on click event instead of using same id for each
     //Then the click event can happen on every button with only one listener
-  let saveButtonEl = $('.saveBtn');
+
+  //sets today's date in header     
+  let today = dayjs();
+  $('#currentDay').text(today.format('MMM D, YYYY'));
+
+  // sets up current time format to correspond with timeblock ID (military time for easy comparisons, too)
   let time = dayjs().format('HH');
   console.log(typeof time);
-  console.log(time);
-  let timeIdFormat = "hour-" + time;
-  console.log(timeIdFormat);
+  console.log(time);  
   
-  let scheduleEl = $('#schedule');
-  let scheduleKids = scheduleEl.children();  
-  console.log(scheduleKids);
+  //function that changes time block color to match the time of day  
+  timeColor();
   
-  //let scheduleArr = Array.from(scheduleKids);
-  //console.log(scheduleArr);
-  //console.log(scheduleEl.children().eq(0).attr('id'));
-
-  //now that i have the time text equaling the id, try .each
-timeBlockColor();
-  
-function timeBlockColor () {
-  
-  //let theTime = (scheduleEl.children().eq(i).attr('id'));
- //console.log(theTime);
-
-  //let strTime = Array.from(theTime);
- // console.log(strTime);
-  //let thisHour = strTime[5] + strTime[6];
-  //console.log(thisHour);
-
+  function timeColor () {
+    
   $(".time-block").each(function() {
-   
+    
+    //set ID to a format that matches the format of the current time
     let theTime = ($(this).attr('id'));
     let strTime = Array.from(theTime);
     console.log(strTime);
     let thisHour = strTime[5] + strTime[6];
     console.log(thisHour);
     console.log(time);
+
+    //changes the timeblock color to match the current time using the ID with modified format
     if (thisHour == time){$(this).addClass('present');} 
     else if (thisHour > time) {$(this).addClass('future');} 
     else if (thisHour < time) {$(this).addClass('past');} 
     else return;
-  })
-   
-    // for (let i = 0; i < scheduleKids.length; i++) {
-      //let kidId = scheduleEl.children().eq(i).attr('id');
-    //  if (kidId === timeIdFormat) {$('.time-block').addClass('present')}
-    // else if (kidId  > timeIdFormat) {$('.time-block').addClass('past')}
-      // else {$('.time-block').addClass('future')};
-      
-     // console.log(scheduleArr);
-      //console.log(scheduleArr[10]);
-
-     /*for (let i = 0; i < scheduleArr.length; i++) {
-       
+    })          
+  }; 
   
-      if (scheduleArr[i] === timeIdFormat) {$('.time-block').addClass('present')};
-      if (scheduleArr[i] > timeIdFormat) {$('.time-block').addClass('past')};
-       if (scheduleArr[i] < timeIdFormat) {$('.time-block').addClass('future')};
-    
-      //timeBlockColor ();
-
-    //console.log(scheduleEl.children().eq(i).attr('id'));
-    let theTime = (scheduleEl.children().eq(i).attr('id')); 
-
-    console.log(theTime);
-    if (theTime === timeIdFormat) {$('.time-block').addClass('present')};
-    if (theTime > timeIdFormat) {$('.time-block').addClass('past')};
-    if (theTime < timeIdFormat) {$('.time-block').addClass('future')};*/
-
-    
-  };
-
-   
-
-  /*function timeBlockColor () {
-    console.log(scheduleArr[10]);
-       for (let i = 0; i < scheduleArr.length; i++) {
-       
-  
-      if (scheduleArr[i] === timeIdFormat) {$('.time-block').addClass('present')};
-      if (scheduleArr[i] > timeIdFormat) {$('.time-block').addClass('past')};
-      if (scheduleArr[i] < timeIdFormat) {$('.time-block').addClass('future')};
-
-      if (theTime === timeIdFormat) {$('.time-block').addClass('present')};
-      if (theTime > timeIdFormat) {$('.time-block').addClass('past')};
-      if (theTime < timeIdFormat) {$('.time-block').addClass('future')};
-  
-      }*/
-
-    /*let theTime = (scheduleEl.children().eq(i).attr('id'));
-    console.log(theTime);
-
-    let strTime = Array.from(theTime);
-    console.log(strTime);
-    let thisHour = strTime[5] + strTime[6];
-    console.log(thisHour);
-    
-    if (thisHour === time) {$('.time-block').css('background-color', '#ff6961')}
-    else if (thisHour > time) {$('.time-block').css('background-color', '#77dd77')}
-    else {$('.time-block').css('background-color', '#d3d3d3')};*/
-  
-  
-
-
-  
-
- 
-  
-
-    //creates a click event on every button with the saveBtn class
+  //creates a click event on every button with the saveBtn class
+  let saveButtonEl = $('.saveBtn');
   saveButtonEl.on('click', saveTextLocal);
-
-    //now I need to make text content of each textEl work for each time block
-    //textEl targets the textarea (input type) in each hour blook
-  let textEl = $('.description'); 
-
 
   function saveTextLocal() {
     console.log('this event listener is working'); 
     let textInput = $(this).siblings('.description').val();
-    let hourText = $(this).siblings('.hour').text();
-  
-    console.log($(this).parent().attr('id'));
-    let thisTime = $(this).parent().attr('id');
-    console.log(thisTime);
-    console.log(typeof thisTime);
-    let strTime = Array.from(thisTime);
-    console.log(strTime);
-    let thisHour = strTime[5] + strTime[6];
-    console.log(thisHour);
-
-    if (thisHour == time) {$(this).parent().css('background-color', '#ff6961')};
-    if (thisHour > time) {$(this).parent().css('background-color', '#77dd77')};
-    if (thisHour < time) {$(this).parent().css('background-color', '#d3d3d3')};
-   
-    /*let thisTimeBlock = {
-
-    }*/
+    let hourText = $(this).siblings('.hour').text(); 
+    
+    
     //let textInput = $(this).siblings('.description').val();
     //let hourText = $(this).siblings('.hour').text();
     
@@ -216,7 +122,6 @@ function timeBlockColor () {
 
   // TODO: Add code to display the current date in the header of the page.
 
-  let today = dayjs();
-  $('#currentDay').text(today.format('MMM D, YYYY'));
+
 
 });
