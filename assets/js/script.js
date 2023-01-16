@@ -17,6 +17,8 @@ $(function () {
   // sets up current time format to correspond with timeblock ID (military time for easy comparisons, too)
   let time = dayjs().format('HH');
   let userArray = [];
+  
+  
   //onsole.log(typeof time);
   //console.log(time);  
   
@@ -51,7 +53,7 @@ $(function () {
 
   function saveTextLocal() {
     //console.log('this event listener is working'); 
-    let textInput = $(this).siblings('.description').val();
+    let textInput = $(this).siblings('.description').val();   
     let hourText = $(this).siblings('.hour').text(); 
     
     //console.log(textInput);  
@@ -69,10 +71,7 @@ $(function () {
 
     //let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
 
-    //console.log(savedInput.userNote);
-
-
-    
+    //console.log(savedInput.userNote);   
      
     
   };   
@@ -83,15 +82,19 @@ $(function () {
     function renderSavedInput () {    
     let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
     console.log(savedInput);
+    console.log(typeof savedInput);
+    console.log(savedInput[0].userNote);
 
     $.each(savedInput, function(index) {
-      userArray.push(savedInput[index]);
+      userArray.push(savedInput[index]);  
+
+      
     })
 
     
     //console.log(typeof savedInput);
    
-    $('.description').text(savedInput.userNote);
+    //($('.description').text(savedInput.userNote));
      
     //console.log(textEl.val());  
     //let renderedText = textEl.val(savedInput);
@@ -105,6 +108,17 @@ $(function () {
   
   console.log(userArray);
 
+  setSavedInput();
+
+
+  function setSavedInput () {
+    let scheduleEl = $('#schedule');
+    console.log(scheduleEl.children());
+    console.log($('#hour-09.description').html('test'));
+    //if (userArray.userTime == '9AM') {$(this).siblings('.description').val(userArray[0]);};
+  }
+  //console.log(userArray[0].userNote);
+ 
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
