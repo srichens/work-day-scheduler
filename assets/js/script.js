@@ -15,8 +15,8 @@ $(function () {
   $('#currentDay').text(today.format('MMM D, YYYY'));
 
   // sets up current time format to correspond with timeblock ID (military time for easy comparisons, too)
-  let time = dayjs().format('HH');
-  let userArray = [];
+  let time = dayjs().format('HH');  
+  //let userArray = [];
   
   
   //onsole.log(typeof time);
@@ -49,15 +49,104 @@ $(function () {
   let saveButtonEl = $('.saveBtn');
   saveButtonEl.on('click', saveTextLocal);
 
+  function saveTextLocal() {
+    console.log('this event listener is working'); 
+    let hourText = $(this).siblings('.hour').text(); 
+    console.log(hourText);
+    let textInput = $(this).siblings('.description').val();   
+    console.log(textInput);
+    //let parentId = $(this).parent.attr('id');
+    //console.log(parentId);
+   
+    let userEntry = {
+      userTime: hourText,
+      userNote: textInput
+    };
+
+    if (hourText === "9AM") {
+        localStorage.setItem("savedEntry09", JSON.stringify(userEntry));
+        console.log(userEntry)} 
+      else if (hourText === "10AM") {
+        localStorage.setItem("savedEntry10", JSON.stringify(userEntry));
+        console.log(userEntry)}
+      else if (hourText === "11AM") {
+        localStorage.setItem("savedEntry11", JSON.stringify(userEntry));
+        console.log(userEntry)}
+      else if (hourText === "12PM") {
+        localStorage.setItem("savedEntry12", JSON.stringify(userEntry));
+        console.log(userEntry)}
+      else if (hourText === "1PM") {
+        localStorage.setItem("savedEntry1", JSON.stringify(userEntry));
+        console.log(userEntry)}
+      else if (hourText === "2PM") {
+        localStorage.setItem("savedEntry2", JSON.stringify(userEntry));
+        console.log(userEntry)}  
+      else if (hourText === "3PM") {
+        localStorage.setItem("savedEntry3", JSON.stringify(userEntry));
+        console.log(userEntry)}  
+      else if (hourText === "4PM") {
+          localStorage.setItem("savedEntry4", JSON.stringify(userEntry));
+          console.log(userEntry)}    
+      else if (hourText === "5PM") {
+          localStorage.setItem("savedEntry5", JSON.stringify(userEntry));
+          console.log(userEntry)};    
+    
+  }
+
+  
+  let savedInput09 = JSON.parse(localStorage.getItem("savedEntry09"));
+  if (savedInput09 != null) {let hour09Text = savedInput09.userNote;
+    console.log(hour09Text); $('#text-09').text(hour09Text)}
+    else return;
+
+    let savedInput10 = JSON.parse(localStorage.getItem("savedEntry10"));
+  if (savedInput10 != null) {let hour10Text = savedInput10.userNote;
+    console.log(hour10Text);}
+    else return;
+
+    let savedInput11 = JSON.parse(localStorage.getItem("savedEntry11"));
+    if (savedInput11 != null) {let hour11Text = savedInput11.userNote;
+      console.log(hour11Text);}
+      else return;
+
+      let savedInput12 = JSON.parse(localStorage.getItem("savedEntry12"));
+    if (savedInput12 != null) {let hour12Text = savedInput12.userNote;
+      console.log(hour12Text);}
+      else return;
+  
+
+  //console.log(savedInput9.userNote);
+
+  /*renderSavedEntry();
+  
+  function renderSavedEntry () {
+    let savedInput9 = JSON.parse(localStorage.getItem("savedEntry9"));
+
+    console.log(savedInput9);
+      
+    
+  /*$(".time-block").each(function() {
+   
+    //set ID to a format that matches the format of the current time
+    let theTime = ($(this).attr('id'));
+    let strTime = Array.from(theTime);
+    //console.log(strTime);
+    let thisHour = strTime[5] + strTime[6];
+  })
+}*/
+
+
   //trying to save text
 
-  function saveTextLocal() {
-    //console.log('this event listener is working'); 
+  /*function saveTextLocal() {
+    console.log('this event listener is working'); 
     let textInput = $(this).siblings('.description').val();   
     let hourText = $(this).siblings('.hour').text(); 
+
     
-    //console.log(textInput);  
-   // console.log(hourText);  
+    
+    console.log(textInput);  
+   console.log(hourText);  
    
    
     let userEntry = {
@@ -67,32 +156,56 @@ $(function () {
     //console.log(userEntry);
     userArray.push(userEntry);
 
-    localStorage.setItem("savedEntry", JSON.stringify(userArray));
+    //localStorage.setItem("savedEntry", JSON.stringify(userArray));
 
-    //let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
+    localStorage.setItem("savedEntry", JSON.stringify(userEntry));
 
-    //console.log(savedInput.userNote);   
+    let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
+
+    console.log(savedInput);   
+
+    console.log(typeof savedInput);
+   
+    //($('.description').text(savedInput.userNote));
+    let textEl = $('.description');
+
+    let newText = $(this).siblings('.description').html(savedInput.userNote);
+    console.log(newText);
+     
+    //console.log(textEl.val());  
+    //let renderedText = textEl.val(savedInput);
+    //renderedText = textEl.innerHTML;
+   // let renderedText = $(this).textEl.val(savedInput);
+    //console.log(renderedText);
+    //console.log(textEl.val());  
      
     
   };   
     
-  renderSavedInput ();   
+  /*renderSavedInput ();   ----
   
 
     function renderSavedInput () {    
     let savedInput = JSON.parse(localStorage.getItem("savedEntry"));
     console.log(savedInput);
     console.log(typeof savedInput);
-    console.log(savedInput[0].userNote);
+    //console.log(savedInput[0].userNote);
+
+    for (let i = 0; i < savedInput.length; i++) {
+    if (savedInput[i].userTime == '9AM') 
+    {console.log(savedInput[i].userTime)};
+    }
+    //{('.desription').val(savedInput[i].userNote)}
+    //else return;};
 
     $.each(savedInput, function(index) {
       userArray.push(savedInput[index]);  
 
       
-    })
+    })      
+  }; --*/
 
-    
-    //console.log(typeof savedInput);
+  //console.log(typeof savedInput);
    
     //($('.description').text(savedInput.userNote));
      
@@ -101,14 +214,11 @@ $(function () {
     //renderedText = textEl.innerHTML;
     //let renderedText = $(this).textEl.val(savedInput);
     //console.log(renderedText);
-    //console.log(textEl.val());   
- 
-    
-  }
+    //console.log(textEl.val());  
   
-  console.log(userArray);
+  //console.log(userArray); -----
 
-  setSavedInput();
+  /*setSavedInput(); ------
 
 
   function setSavedInput () {
@@ -116,7 +226,7 @@ $(function () {
     console.log(scheduleEl.children());
     console.log($('#hour-09.description').html('test'));
     //if (userArray.userTime == '9AM') {$(this).siblings('.description').val(userArray[0]);};
-  }
+  }*/
   //console.log(userArray[0].userNote);
  
 
