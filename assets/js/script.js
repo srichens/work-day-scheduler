@@ -76,19 +76,19 @@ $(function () {
         localStorage.setItem("savedEntry12", JSON.stringify(userEntry));
         console.log(userEntry)}
       else if (hourText === "1PM") {
-        localStorage.setItem("savedEntry1", JSON.stringify(userEntry));
+        localStorage.setItem("savedEntry13", JSON.stringify(userEntry));
         console.log(userEntry)}
       else if (hourText === "2PM") {
-        localStorage.setItem("savedEntry2", JSON.stringify(userEntry));
+        localStorage.setItem("savedEntry14", JSON.stringify(userEntry));
         console.log(userEntry)}  
       else if (hourText === "3PM") {
-        localStorage.setItem("savedEntry3", JSON.stringify(userEntry));
+        localStorage.setItem("savedEntry15", JSON.stringify(userEntry));
         console.log(userEntry)}  
       else if (hourText === "4PM") {
-          localStorage.setItem("savedEntry4", JSON.stringify(userEntry));
+          localStorage.setItem("savedEntry16", JSON.stringify(userEntry));
           console.log(userEntry)}    
       else if (hourText === "5PM") {
-          localStorage.setItem("savedEntry5", JSON.stringify(userEntry));
+          localStorage.setItem("savedEntry17", JSON.stringify(userEntry));
           console.log(userEntry)};    
     
   }
@@ -101,19 +101,44 @@ $(function () {
 
     let savedInput10 = JSON.parse(localStorage.getItem("savedEntry10"));
   if (savedInput10 != null) {let hour10Text = savedInput10.userNote;
-    console.log(hour10Text);}
+    console.log(hour10Text); $('#text-10').text(hour10Text)}
     else return;
 
     let savedInput11 = JSON.parse(localStorage.getItem("savedEntry11"));
     if (savedInput11 != null) {let hour11Text = savedInput11.userNote;
-      console.log(hour11Text);}
+      console.log(hour11Text); $('#text-11').text(hour11Text)}
       else return;
 
-      let savedInput12 = JSON.parse(localStorage.getItem("savedEntry12"));
+    let savedInput12 = JSON.parse(localStorage.getItem("savedEntry12"));
     if (savedInput12 != null) {let hour12Text = savedInput12.userNote;
-      console.log(hour12Text);}
+      console.log(hour12Text); $('#text-12').text(hour12Text)}
       else return;
   
+
+    let savedInput13 = JSON.parse(localStorage.getItem("savedEntry13"));
+    if (savedInput13 != null) {let hour13Text = savedInput13.userNote;
+      console.log(hour13Text); $('#text-13').text(hour13Text)}
+      else return;
+
+    let savedInput14 = JSON.parse(localStorage.getItem("savedEntry14"));
+    if (savedInput14 != null) {let hour14Text = savedInput14.userNote;
+      console.log(hour14Text); $('#text-14').text(hour14Text)}
+      else return;
+
+    let savedInput15 = JSON.parse(localStorage.getItem("savedEntry15"));
+    if (savedInput15 != null) {let hour15Text = savedInput15.userNote;
+      console.log(hour15Text); $('#text-15').text(hour15Text)}
+      else return;
+                 
+    let savedInput16 = JSON.parse(localStorage.getItem("savedEntry16"));
+    if (savedInput16 != null) {let hour16Text = savedInput16.userNote;
+      console.log(hour16Text); $('#text-16').text(hour16Text)}
+      else return;
+
+    let savedInput17 = JSON.parse(localStorage.getItem("savedEntry17"));
+    if (savedInput17 != null) {let hour17Text = savedInput17.userNote;
+        console.log(hour17Text); $('#text-17').text(hour17Text)}
+        else return;
 
   //console.log(savedInput9.userNote);
 
