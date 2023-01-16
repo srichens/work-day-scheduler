@@ -32,88 +32,92 @@ $(function () {
   saveButtonEl.on('click', saveTextLocal);
 
   function saveTextLocal() {
-    console.log('this event listener is working'); 
     let hourText = $(this).siblings('.hour').text(); 
-    console.log(hourText);
     let textInput = $(this).siblings('.description').val();   
-    console.log(textInput);   
    
     let userEntry = {
       userTime: hourText,
       userNote: textInput
     };
 
+    //saves text to local storage individually in each time block 
+    //I originally tried to loop through and then save them all in array,
+    //but it was to complicated to figure, so I switched to saving individually,
+    //which my tutor suggested
     if (hourText === "9AM") {
       localStorage.setItem("savedEntry09", JSON.stringify(userEntry));
-      console.log(userEntry)} 
+    } 
     else if (hourText === "10AM") {
-      localStorage.setItem("savedEntry10", JSON.stringify(userEntry));
-      console.log(userEntry)}
+      localStorage.setItem("savedEntry10", JSON.stringify(userEntry));      
+    }
     else if (hourText === "11AM") {
       localStorage.setItem("savedEntry11", JSON.stringify(userEntry));
-      console.log(userEntry)}
+    }
     else if (hourText === "12PM") {
       localStorage.setItem("savedEntry12", JSON.stringify(userEntry));
-      console.log(userEntry)}
+    }
     else if (hourText === "1PM") {
       localStorage.setItem("savedEntry13", JSON.stringify(userEntry));
-      console.log(userEntry)}
+    }
     else if (hourText === "2PM") {
       localStorage.setItem("savedEntry14", JSON.stringify(userEntry));
-      console.log(userEntry)}  
+    }  
     else if (hourText === "3PM") {
       localStorage.setItem("savedEntry15", JSON.stringify(userEntry));
-      console.log(userEntry)}  
+    }  
     else if (hourText === "4PM") {
       localStorage.setItem("savedEntry16", JSON.stringify(userEntry));
-      console.log(userEntry)}    
+    }    
     else if (hourText === "5PM") {
       localStorage.setItem("savedEntry17", JSON.stringify(userEntry));
-      console.log(userEntry)};       
+    };       
   };
-  
+
+  //renders text to the page and saves after refresh
+  //I know there must be a way to also do this in a consolidated way with a loop,
+  //but I couldn't figure it out
   let savedInput09 = JSON.parse(localStorage.getItem("savedEntry09"));
   if (savedInput09 != null) {let hour09Text = savedInput09.userNote;
-    console.log(hour09Text); $('#text-09').text(hour09Text)}
+    $('#text-09').text(hour09Text)}
     else return;
 
   let savedInput10 = JSON.parse(localStorage.getItem("savedEntry10"));
   if (savedInput10 != null) {let hour10Text = savedInput10.userNote;
-    console.log(hour10Text); $('#text-10').text(hour10Text)}
+    $('#text-10').text(hour10Text)}
     else return;
 
   let savedInput11 = JSON.parse(localStorage.getItem("savedEntry11"));
   if (savedInput11 != null) {let hour11Text = savedInput11.userNote;
-    console.log(hour11Text); $('#text-11').text(hour11Text)}
+    $('#text-11').text(hour11Text)}
     else return;
 
   let savedInput12 = JSON.parse(localStorage.getItem("savedEntry12"));
   if (savedInput12 != null) {let hour12Text = savedInput12.userNote;
-      console.log(hour12Text); $('#text-12').text(hour12Text)}
+      $('#text-12').text(hour12Text)}
       else return;  
 
   let savedInput13 = JSON.parse(localStorage.getItem("savedEntry13"));
   if (savedInput13 != null) {let hour13Text = savedInput13.userNote;
-      console.log(hour13Text); $('#text-13').text(hour13Text)}
+      $('#text-13').text(hour13Text)}
       else return;
 
   let savedInput14 = JSON.parse(localStorage.getItem("savedEntry14"));
   if (savedInput14 != null) {let hour14Text = savedInput14.userNote;
-      console.log(hour14Text); $('#text-14').text(hour14Text)}
+      $('#text-14').text(hour14Text)}
       else return;
 
   let savedInput15 = JSON.parse(localStorage.getItem("savedEntry15"));
   if (savedInput15 != null) {let hour15Text = savedInput15.userNote;
-      console.log(hour15Text); $('#text-15').text(hour15Text)}
+      $('#text-15').text(hour15Text)}
       else return;
                  
   let savedInput16 = JSON.parse(localStorage.getItem("savedEntry16"));
   if (savedInput16 != null) {let hour16Text = savedInput16.userNote;
-      console.log(hour16Text); $('#text-16').text(hour16Text)}
+      $('#text-16').text(hour16Text)}
       else return;
 
   let savedInput17 = JSON.parse(localStorage.getItem("savedEntry17"));
   if (savedInput17 != null) {let hour17Text = savedInput17.userNote;
-      console.log(hour17Text); $('#text-17').text(hour17Text)}
+      $('#text-17').text(hour17Text)}
       else return;
 });
